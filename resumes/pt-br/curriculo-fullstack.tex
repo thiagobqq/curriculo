@@ -33,7 +33,8 @@
 \usepackage{xurl}
 
 % --- CONFIGURAÇÃO: MARGENS / ESPAÇAMENTO ---
-\geometry{top=1.5cm, bottom=1.5cm, left=1.5cm, right=1.5cm} % Margens da página
+\geometry{top=1.2cm, bottom=1.2cm, left=1.5cm, right=1.5cm} % Margens da página
+\setlength{\parskip}{2pt plus 1pt}
 \setcounter{secnumdepth}{0}                                 % Remove numeração de seção
 \setlist[itemize]{
     leftmargin=0.75em, % Recuo da lista (mais perto da margem da página)
@@ -70,6 +71,7 @@
 {0em}
 {}
 \titlespacing*{\subsection}{0pt}{0.35em}{0.15em}
+\titlespacing*{\section}{0pt}{0.7em}{0.2em}
 
 % Macro para entradas do currículo com bookmark no PDF
 \newcounter{cventry}
@@ -83,11 +85,12 @@
     \end{tabularx}
 }
 
-% Macro para projetos: nome (com link) / stack / descrição
-\newcommand{\projectentry}[3]{%
+% Macro para projetos: nome (com link) / stack / link visível / descrição
+\newcommand{\projectentry}[4]{%
     \phantomsection%
     \noindent #1 \hfill \textit{#2}\par\nopagebreak
-    {\small #3}\par\vspace{0.45em}%
+    {\small #3}\par\nopagebreak
+    {\small #4}\par\vspace{0.25em}%
 }
 
 % --- INÍCIO DO DOCUMENTO ---
@@ -126,28 +129,25 @@
 % ------
 
 \section{Projetos}
-    \projectentry{\href{https://github.com/thiagobqq/Cinema-API}{\textbf{Cinema-API}}}{.NET \textbullet{} Clean Architecture \textbullet{} DDD}{Backend de cinema e venda de ingressos em monolito modular, com módulos isolados de autenticação, filmes, ingressos e pagamentos.}
+    \projectentry{\href{https://vagalume.farfromwonderland.xyz/}{\textbf{Vagalume}}}{C\# \textbullet{} .NET \textbullet{} PostgreSQL \textbullet{} React}{\href{https://vagalume.farfromwonderland.xyz/}{vagalume.farfromwonderland.xyz}}{Plataforma full stack que centraliza a busca por oportunidades: reúne vagas de diferentes fontes, registra o andamento de cada candidatura e mantém o histórico completo dos processos seletivos.}
 
-    \projectentry{\textbf{Vaga Fácil}}{Spring Boot \textbullet{} React \textbullet{} API Pix}{Plataforma freelancer que analisa currículos automaticamente e integra pagamentos via Pix; stack completa em Spring Boot e React (projeto privado).}
+    \projectentry{\href{https://github.com/thiagobqq/Cinema-API}{\textbf{Cinema-API}}}{.NET \textbullet{} Clean Architecture \textbullet{} DDD}{\href{https://github.com/thiagobqq/Cinema-API}{github.com/thiagobqq/Cinema-API}}{Backend de cinema e venda de ingressos em monolito modular, com módulos isolados de autenticação, filmes, ingressos e pagamentos.}
 
-    \projectentry{\href{https://github.com/thiagobqq/SearchEngine}{\textbf{SearchEngine}}}{C\# \textbullet{} .NET}{Motor de busca construído em C\# do zero, com indexação eficiente de documentos, estruturas de dados próprias e consulta por relevância.}
+    \projectentry{\href{https://github.com/thiagobqq/chat-irl}{\textbf{chat-irl}}}{.NET \textbullet{} SignalR \textbullet{} React \textbullet{} WebSocket}{\href{https://github.com/thiagobqq/chat-irl}{github.com/thiagobqq/chat-irl} \textbullet{} \href{https://chat-irl.farfromwonderland.xyz/}{chat-irl.farfromwonderland.xyz}}{Chat fullstack em tempo real com SignalR sobre WebSocket: back-end .NET em camadas (Core/Infra/Web) e front-end React com roteamento e páginas dedicadas.}
 
-    \projectentry{\href{https://github.com/thiagobqq/chat-irl}{\textbf{chat-irl}}}{.NET \textbullet{} SignalR \textbullet{} React \textbullet{} WebSocket}{Chat fullstack em tempo real com SignalR sobre WebSocket: back-end .NET em camadas (Core/Infra/Web) e front-end React com roteamento e páginas dedicadas.}
-
-    \projectentry{\href{https://portal.unit.br/blog/noticias/farmacia-pet-une-saude-animal-tecnologia-e-sustentabilidade-no-conecta-farolandia/}{\textbf{TomPet}}}{React \textbullet{} .NET}{Projeto desenvolvido para a SEMA Aracaju: sistema Farmácia Pet com front-end React e back-end .NET para controle de estoque, prescrições e navegação de operadores.}
+    \projectentry{\href{https://github.com/thiagobqq/SearchEngine}{\textbf{SearchEngine}}}{C\# \textbullet{} .NET}{\href{https://github.com/thiagobqq/SearchEngine}{github.com/thiagobqq/SearchEngine}}{Motor de busca construído em C\# do zero, com indexação eficiente de documentos, estruturas de dados próprias e consulta por relevância.}
 
 % ------
 
 \section{Habilidades}
     \begin{itemize}
-        \item \textbf{Front-end:} React, Next.js, TypeScript, Tailwind CSS, Material UI
-        \item \textbf{Back-end:} C\#/.NET 9, ASP.NET Core, Java/Spring Boot, APIs REST
-        \item \textbf{Arquitetura:} Clean Architecture, DDD, SOLID, monolito modular, event-driven, mensageria (RabbitMQ)
-        \item \textbf{Dados:} SQL Server, EF Core, PostgreSQL, Redis
-        \item \textbf{Infra \& DevOps:} Docker, Linux (Ubuntu), Nginx, CI/CD (GitHub Actions), Git
-        \item \textbf{IA:} Agentes de IA, programação com IA
-        \item \textbf{IA:} agentes de IA, programação assistida por IA e Spec-Driven Development
-        \item \textbf{Idiomas:} Português (Nativo), Inglês (Avançado/Fluente)
+        \item \textbf{Frontend:} React, TypeScript, Next.js, Tailwind CSS, Material UI
+        \item \textbf{Backend:} C\#, .NET 9, ASP.NET Core, Java, Spring Boot, APIs REST
+        \item \textbf{Dados:} SQL Server, PostgreSQL, Redis, Entity Framework Core
+        \item \textbf{Arquitetura:} Clean Architecture, DDD, SOLID, monolito modular
+        \item \textbf{DevOps:} Docker, Linux, Nginx, GitHub Actions, Git
+        \item \textbf{Realtime \& Mensageria:} SignalR, SSE, RabbitMQ
+        \item \textbf{Idiomas:} Português (Nativo), Inglês (Avançado)
     \end{itemize}
 
 % ------
