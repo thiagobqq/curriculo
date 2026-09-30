@@ -1,0 +1,61 @@
+name: Build and publish resumes
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "resumes/**"
+      - ".github/workflows/resume.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compile English resume
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: resumes/en
+          root_file: resume-fullstack.tex
+
+      - name: Compile Portuguese resume
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: resumes/pt-br
+          root_file: curriculo-fullstack.tex
+
+      - name: Assemble Pages site
+        run: |
+          mkdir -p dist
+          cp resumes/en/resume-fullstack.pdf dist/resume-en.pdf
+          cp resumes/pt-br/curriculo-fullstack.pdf dist/curriculo-pt-br.pdf
+          printf '%s' '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Resumes - Thiago Buarque</title></head><body style="font-family:system-ui,sans-serif;max-width:40rem;margin:3rem auto;line-height:1.6"><h1>Resumes</h1><ul><li><a href="curriculo-pt-br.pdf">Curriculo (pt-BR)</a></li><li><a href="resume-en.pdf">Resume (EN)</a></li></ul></body></html>' > dist/index.html
+          ls -la dist
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
